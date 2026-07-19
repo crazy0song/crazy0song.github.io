@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>2026牛客暑期多校训练营1题解 | crazy0song的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Problem E. 排列求值Input file: standard inputOutput file: standard outputTime limit: 1 secondMemory limit: 1024 megabytes 对于一个 0 到 $n-1$ 的排列 $P$，定义它的权值为： $$f(P) &#x3D; \sum_{0 \le i &lt; j &lt; n} (P_j -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026牛客暑期多校训练营1题解">
+<meta property="og:url" content="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="crazy0song的个人博客">
+<meta property="og:description" content="Problem E. 排列求值Input file: standard inputOutput file: standard outputTime limit: 1 secondMemory limit: 1024 megabytes 对于一个 0 到 $n-1$ 的排列 $P$，定义它的权值为： $$f(P) &#x3D; \sum_{0 \le i &lt; j &lt; n} (P_j -">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-07-18T08:50:17.000Z">
+<meta property="article:modified_time" content="2026-07-19T12:33:10.578Z">
+<meta property="article:author" content="crazy0song">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="crazy0song的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">crazy0song的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026牛客暑期多校训练营1题解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-07-18T08:50:17.000Z" itemprop="datePublished">2026-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      2026牛客暑期多校训练营1题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Problem-E-排列求值"><a href="#Problem-E-排列求值" class="headerlink" title="Problem E. 排列求值"></a>Problem E. 排列求值</h1><p><strong>Input file:</strong> standard input<br><strong>Output file:</strong> standard output<br><strong>Time limit:</strong> 1 second<br><strong>Memory limit:</strong> 1024 megabytes</p>
+<p>对于一个 0 到 $n-1$ 的排列 $P$，定义它的权值为：</p>
+<p>$$<br>f(P) &#x3D; \sum_{0 \le i &lt; j &lt; n} (P_j - P_i)<br>$$</p>
+<p>给定一个 0 到 $n-1$ 的排列 $P$，输出它的权值。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行包含一个整数 $n$（$1 \le n \le 2 \times 10^5$）。<br>第二行包含 $n$ 个整数 $P_0, P_1, \dots, P_{n-1}$，表示给定的 0 到 $n-1$ 的排列。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出一行包含一个整数，表示排列的权值。</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><table>
+<thead>
+<tr>
+<th>standard input</th>
+<th>standard output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2 0 1 3</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>这个题不涉及算法知识，涉及一些数学逻辑。</p>
+<p>对于任意的位置k（下标从0到n），它会减去它之前的所有数，也会被它之后的所有数减去，也就是它的权值是<br>$$<br>P_k &#x3D; k-(n-1-k)&#x3D;2k-n+1<br>$$<br>依次对每一个位置的数乘该位置的权值再求和即可得到答案，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">a</span><span class="params">(<span class="number">200010</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">long</span> <span class="type">long</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        ans += a[i] * (i * <span class="number">2</span> - n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Problem-F-排列生成"><a href="#Problem-F-排列生成" class="headerlink" title="Problem F. 排列生成"></a>Problem F. 排列生成</h1><p><strong>Input file:</strong> standard input<br><strong>Output file:</strong> standard output<br><strong>Time limit:</strong> 1 second<br><strong>Memory limit:</strong> 1024 megabytes</p>
+<p>对于一个 0 到 $n-1$ 的排列 $P$，定义它的权值为：</p>
+<p>$$f(P) &#x3D; \sum_{0 \le i &lt; j &lt; n} (P_j - P_i)$$</p>
+<p>给定一个 0 到 $n-1$ 的排列 $P$，以及两个整数 $k$ 和 $x$（$0 \le k, x &lt; n$）。要求构造一个 0 到 $n-1$ 的排列 $P’$，满足以下两个条件：</p>
+<ul>
+<li>$P’_k &#x3D; x$（即 $P’$ 的第 $k$ 个元素为 $x$，下标从 0 开始）；</li>
+<li>$f(P’) \equiv f(P) \pmod{n}$。</li>
+</ul>
+<p>如果有解，输出任意一组符合条件的排列 $P’$；如果无解，输出 $-1$。</p>
+<h2 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h2><p>第一行包含三个整数 $n$（$1 \le n \le 2 \times 10^5$），$k$ 和 $x$（$0 \le k, x &lt; n$）。<br>第二行包含 $n$ 个整数 $P_0, P_1, \dots, P_{n-1}$，表示给定的 0 到 $n-1$ 的排列。</p>
+<h2 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h2><p>如果无解，输出一行包含一个整数 $-1$。否则输出一行包含 $n$ 个整数，表示符合条件的排列 $P’$。</p>
+<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h2><table>
+<thead>
+<tr>
+<th>standard input</th>
+<th>standard output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4 1 3</td>
+<td>0 3 1 2</td>
+</tr>
+<tr>
+<td>2 0 1 3</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>本题是E题的延伸，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" data-id="cuiduFDRb2Rj1w7AcAEtmIfJZ" data-title="2026牛客暑期多校训练营1题解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营1题解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 crazy0song<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
