@@ -14,7 +14,7 @@
 <meta property="og:description" content="Problem E. 排列求值Input file: standard inputOutput file: standard outputTime limit: 1 secondMemory limit: 1024 megabytes 对于一个 0 到 $n-1$ 的排列 $P$，定义它的权值为： $$f(P) &#x3D; \sum_{0 \le i &lt; j &lt; n} (P_j -">
 <meta property="og:locale">
 <meta property="article:published_time" content="2026-07-18T08:50:17.000Z">
-<meta property="article:modified_time" content="2026-07-19T12:37:19.239Z">
+<meta property="article:modified_time" content="2026-07-20T02:25:39.026Z">
 <meta property="article:author" content="crazy0song">
 <meta property="article:tag" content="题解">
 <meta name="twitter:card" content="summary">
@@ -149,12 +149,15 @@
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>本题是E题的延伸，</p>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>本题是E题的延伸，已知有如下公式：<br>$$<br>(a + b) mod \ n \equiv(a mod\ n + b mod\ n)mod\ n\<br>(a * b) mod \ n \equiv(a mod\ n * b mod\ n)mod\ n<br>$$<br>结合一下E题的公式，会发现可以把排列加上任意的正整数k再模n，然后就可以得到一个与原来排列的权值同余的排列。<strong>题目中的输出-1是烟雾弹，不会有指定一个位置的数为某个数而导致生成不了符合条件的排列的情况。</strong></p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, k, x;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k &gt;&gt; x;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">a</span><span class="params">(<span class="number">200010</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> add = (x - a[k] + n) % n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">        a[i] = (a[i] + add) % n;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" data-id="cuid07RMgS49JjWslEpFo6Nbv" data-title="2026牛客暑期多校训练营1题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" data-id="cuidMOII5wcvmeqY3LYx0NqvW" data-title="2026牛客暑期多校训练营1题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
