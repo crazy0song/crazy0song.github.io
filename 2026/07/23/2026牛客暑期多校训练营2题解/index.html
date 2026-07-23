@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>2026牛客暑期多校训练营2题解 | crazy0song的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Problem M. 可能连通罢（Maybe Connected）Input file: standard inputOutput file: standard outputTime limit: 1 secondMemory limit: 256 MB 小羊对于一个图中，两个点可能不相连但是连通这件事感到很讶异。两个点相连指的是两个点之间有边，而两个点连通指的是存在一条路径从一点出发到达另一点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026牛客暑期多校训练营2题解">
+<meta property="og:url" content="http://example.com/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="crazy0song的个人博客">
+<meta property="og:description" content="Problem M. 可能连通罢（Maybe Connected）Input file: standard inputOutput file: standard outputTime limit: 1 secondMemory limit: 256 MB 小羊对于一个图中，两个点可能不相连但是连通这件事感到很讶异。两个点相连指的是两个点之间有边，而两个点连通指的是存在一条路径从一点出发到达另一点。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-07-23T08:11:32.000Z">
+<meta property="article:modified_time" content="2026-07-23T10:11:48.903Z">
+<meta property="article:author" content="crazy0song">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="crazy0song的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">crazy0song的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026牛客暑期多校训练营2题解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-07-23T08:11:32.000Z" itemprop="datePublished">2026-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      2026牛客暑期多校训练营2题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Problem-M-可能连通罢（Maybe-Connected）"><a href="#Problem-M-可能连通罢（Maybe-Connected）" class="headerlink" title="Problem M. 可能连通罢（Maybe Connected）"></a>Problem M. 可能连通罢（Maybe Connected）</h1><p><strong>Input file:</strong> standard input<br><strong>Output file:</strong> standard output<br><strong>Time limit:</strong> 1 second<br><strong>Memory limit:</strong> 256 MB</p>
+<p>小羊对于一个图中，两个点可能不相连但是连通这件事感到很讶异。两个点<strong>相连</strong>指的是两个点之间有边，而两个点<strong>连通</strong>指的是存在一条路径从一点出发到达另一点。</p>
+<p>小羊给你一个 $n$ 个结点的没有边的图，并让你给这个图上新增 $m$ 条无向边。他希望你能最大化满足以下条件的点对 $(u, v)$（$u \ne v$）的数量：</p>
+<ul>
+<li>$u$ 和 $v$ 不相连（即没有直接边）；</li>
+<li>$u$ 和 $v$ 连通（即存在一条路径）。</li>
+</ul>
+<p>图可能很大，所以你不需要完整输出这个图的各条边，只需输出这个对数的最大值即可。这里 $(u, v)$ 和 $(v, u)$ 被认为是相同的点对。</p>
+<p>注意：图中不允许出现自环和重边。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>每个输入包含多个测试样例。输入的第一行包含测试样例的数量 $T$（$1 \le T \le 10^4$）。每个测试样例的输入格式如下：</p>
+<p>每个测试样例有且仅有一行，包含两个整数 $n$ 和 $m$（$1 \le n \le 10^5$，$0 \le m \le \min(\frac{n(n-1)}{2}, 10^9)$）——分别表示结点的个数以及需要新增的边的数量。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试样例，输出一个整数，表示连通但不相连的点对 $(u, v)$（$u \ne v$）数量的最大值。</p>
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th><strong>标准输入</strong></th>
+<th><strong>标准输出</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3 2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4 6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5 3</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>本题考察图的连通性相关的知识点。已知一个节点为n的图，若它是连通的，则至少有n-1条边。当节点为n并且边数为m的时候，若m&lt;n，则原图可看作为一个由m+1个节点构成的树，每两个节点之间都是连通的，每条边会让两个节点相连，则连通但不相连的节点数量为:<br>$$<br>num &#x3D; m(m+1)&#x2F;2<br>$$</p>
+<p>若m&gt;&#x3D;n，则原图的n个节点都是互相连通的。可以从完全图开始拆边，每拆一条边就会多一对符合条件的点。那么连通但不相连的节点数量为:<br>$$<br>num &#x3D; n(n - 1) &#x2F; 2<br>$$<br>代码如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (m &gt; n) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> temp = n * (n - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        ans = temp - m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (m &lt;= n) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> temp = (m + <span class="number">1</span>) * m / <span class="number">2</span>;</span><br><span class="line">        ans = temp - m;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">long</span> <span class="type">long</span> i = <span class="number">0</span>; i &lt; t; i ++) &#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/" data-id="cuid3CxVEAznT1WYKJ4OJ7nZQ" data-title="2026牛客暑期多校训练营2题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">2026牛客暑期多校训练营1题解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营2题解</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营1题解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 crazy0song<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
