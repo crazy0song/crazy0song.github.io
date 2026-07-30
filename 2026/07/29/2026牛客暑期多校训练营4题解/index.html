@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>2026牛客暑期多校训练营4题解 | crazy0song的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Problem I. Rounddog II**题目原地址：**https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;133879&#x2F;I 输入文件： 标准输入输出文件： 标准输出 你是 Rounddog 的狂热粉丝，所以你要出一道关于 Rounddog 的题目。 设 T1 &#x3D; Rounddog。对于每个整数 i &gt; 1，定义 Ti &#x3D; Ti-1 + g，其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026牛客暑期多校训练营4题解">
+<meta property="og:url" content="http://example.com/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="crazy0song的个人博客">
+<meta property="og:description" content="Problem I. Rounddog II**题目原地址：**https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;133879&#x2F;I 输入文件： 标准输入输出文件： 标准输出 你是 Rounddog 的狂热粉丝，所以你要出一道关于 Rounddog 的题目。 设 T1 &#x3D; Rounddog。对于每个整数 i &gt; 1，定义 Ti &#x3D; Ti-1 + g，其">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-07-29T12:22:35.000Z">
+<meta property="article:modified_time" content="2026-07-30T03:37:03.135Z">
+<meta property="article:author" content="crazy0song">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="crazy0song的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">crazy0song的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026牛客暑期多校训练营4题解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-07-29T12:22:35.000Z" itemprop="datePublished">2026-07-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      2026牛客暑期多校训练营4题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Problem-I-Rounddog-II"><a href="#Problem-I-Rounddog-II" class="headerlink" title="Problem I. Rounddog II"></a>Problem I. Rounddog II</h1><p>**题目原地址：**<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/133879/I">https://ac.nowcoder.com/acm/contest/133879/I</a></p>
+<p><strong>输入文件：</strong> 标准输入<br><strong>输出文件：</strong> 标准输出</p>
+<p>你是 Rounddog 的狂热粉丝，所以你要出一道关于 Rounddog 的题目。</p>
+<p>设 T1 &#x3D; Rounddog。<br>对于每个整数 i &gt; 1，定义 Ti &#x3D; Ti-1 + g，其中 + 表示字符串拼接。<br>换句话说，Ti 是字符串 <code>Rounddo</code> 后面紧跟着恰好 i 个字符 <code>g</code>。</p>
+<p>给定一个字符串 S 和一个整数 k。考虑 S 的所有循环移位。<br>字符串 S 的一个循环移位是通过选择一个位置，并将该位置之前的前缀移动到字符串末尾得到的。例如，<code>abcd</code> 的循环移位有 <code>abcd</code>、<code>bcda</code>、<code>cdab</code> 和 <code>dabc</code>。</p>
+<p>你的任务是统计有多少个 S 的循环移位包含 Tk 作为一个连续子串。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含一个整数 t（1 ≤ t ≤ 10^5），表示测试用例的数量。</p>
+<p>对于每个测试用例：</p>
+<ul>
+<li>第一行包含一个字符串 S（1 ≤ |S| ≤ 10^5）；</li>
+<li>第二行包含一个整数 k（1 ≤ k ≤ 100）。</li>
+</ul>
+<p>保证所有测试用例中 |S| 的总和不超过 10^5，并且 S 只包含大写字母和小写字母。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试用例，输出一个整数，表示包含 Tk 作为连续子串的循环移位数量。</p>
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th>标准输入</th>
+<th>标准输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Rounddoggggggggggggggggg</td>
+<td>8</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+</tr>
+<tr>
+<td>RounddogRounddo</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>abcdefgabcdegf</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>这个题我们需要匹配给定的字符串和输入的字符串。观察可以发现给定的字符串一定是以大写的R开头的，那么我们就可以在输入的字符串中只搜索<strong>R</strong>出现的位置，然后搜索到了就与Tk进行匹配，如果每一位都相同那么cnt++。同时要注意输入的字符串是可以进行循环移位的，那么我们就可以将s直接拼接在自己后面，这样相当于进行了循环移位，接下来的循环中就只用移动滑动窗口就行了。</p>
+<p>接下来就是根据cnt的值求答案，如果cnt是0，答案显然是0，如果cnt是1，答案就是s的长度减去tk的长度再加一，可以理解为在保证tk连续的出现在s中的情况下任意循环移位。如果cnt大于1，那么任何循环移位都会至少有一个连续的tk出现在s中，因为循环移位最多破坏一个tk，另一个tk必定是完整的。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">    cin &gt;&gt; k;</span><br><span class="line">    <span class="type">int</span> sz = s.<span class="built_in">size</span>();</span><br><span class="line">    s += s;</span><br><span class="line">    string tpt = <span class="string">&quot;Rounddog&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; k; i ++) &#123;</span><br><span class="line">        tpt += <span class="string">&#x27;g&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n = sz - tpt.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sz; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;R&#x27;</span>) &#123;</span><br><span class="line">            <span class="type">int</span> flag = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; i + tpt.<span class="built_in">size</span>(); j ++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tpt[j - i] != s[j]) &#123;</span><br><span class="line">                    flag = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (flag) cnt ++;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans;</span><br><span class="line">    <span class="keyword">if</span> (cnt &gt; <span class="number">1</span>) ans = sz;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (cnt == <span class="number">1</span>) ans = n;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (cnt == <span class="number">0</span>) ans = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">long</span> <span class="type">long</span> i = <span class="number">0</span>; i &lt; t; i ++) &#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Problem-C-重测队列"><a href="#Problem-C-重测队列" class="headerlink" title="Problem C. 重测队列"></a>Problem C. 重测队列</h1><p>**题目原地址：**<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/133879/C">https://ac.nowcoder.com/acm/contest/133879/C</a></p>
+<p><strong>输入文件：</strong> 标准输入<br><strong>输出文件：</strong> 标准输出</p>
+<p>一次大型比赛结束后，评测集群还要做一次复查：把 n 个程序在同一套 m 个测试点上重新评测。每个程序都会使用同一个测试点队列。</p>
+<p>评测机处理一个程序时，会从队列开头依次运行测试点。一旦某个测试点给出拒绝结果，评测机在运行完这个测试点后立刻停止处理这个程序。通过全部测试点的程序会运行完整个队列。</p>
+<p>复查开始前，历史日志已经给出了每个程序在每个测试点上的表现。第 i 个程序运行第 j 个测试点需要 d[i][j] 的时间，结果要么是接受，要么是拒绝。无论结果如何，只要这个测试点被实际运行，d[i][j] 都会计入集群总耗时。</p>
+<p>你可以在复查前任意重排这 m 个测试点。求评测完全部 n 个程序所需的最小总耗时。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含两个整数 n 和 m，分别表示程序个数和测试点个数。</p>
+<p>接下来 n 行，第 i 行描述第 i 个程序。每行先包含 m 个整数 $d_{i,1}$, $d_{i,2}$, …,$d_{i,m}$，随后包含一个长度为 m 的字符串 s[i]。若 s[i] 的第 j 个字符为 A，表示第 i 个程序在第 j 个测试点上的结果是接受；若为 R，表示结果是拒绝。</p>
+<p>保证：</p>
+<ul>
+<li>1 ≤ n ≤ 2×$10^4$</li>
+<li>1 ≤ m ≤ 20</li>
+<li>1 ≤ $d_{i, j}$ ≤ $10^9$</li>
+<li>s[i] 仅包含字符 A 和 R</li>
+</ul>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示最小可能的总耗时。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th>标准输入</th>
+<th>标准输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3 3</td>
+<td>27</td>
+</tr>
+<tr>
+<td>3 10 2 ARA</td>
+<td></td>
+</tr>
+<tr>
+<td>5 1 4 RAA</td>
+<td></td>
+</tr>
+<tr>
+<td>2 2 7 AAR</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>这个题涉及到的算法有sos dp和状压dp。首先我们考虑将数据按照在第几位是R按二进制存起来，<strong>是R为1，不是为0</strong>。然后我们考虑怎样让一个状态的耗时总和最小，可以很自然的想到去考虑它的子集，在他的子集中找到加上下一个测试点后耗时最小的那一个，并将其赋值给这个状态。我们记dp[i]为**选取的测试点为i时所耗的最小时间。**例如，dp[3]中i的掩码为11，也就是已选取的测试点为1和2。</p>
+<p>接下来我们要考虑R的情况，当一个程序的测试点的结果为R时，之后的测试点都不会运行，因此我们需要使用SOS dp，把所有之前存下来的时间数据根据R的掩码排列求前缀和，比如g[3] [j]就包括了g[1] [j]和g[2] [j]。基于此种变换，我们就可以很方便的算出cost。比如我们要求dp[7]，其掩码为111，子集是101，110，011，我们就可以遍历找到下标为这几个子集的数据，并将其加上cost。cost的计算方法为:假设此时掩码为mask，我们设一个步长step&#x3D;1，每次将step左移一位，将左移的位数记作j，并和mask按位与运算，保证mask第j + 1位为1，然后我们对mask和1&lt;&lt;j进行异或运算，可以得到消除了第j+1位的mask，即mask的一个最大真子集，记这个真子集为prev，我们再对prev求补集，得到一个未选集合complement。程序i还没有停可以翻译为这个程序的掩码Ri和已选集合的交集是空集，即Ri是complement的子集。而g[complement] [j]又包含了complement的所有子集，即所有的还在运行的程序。因此cost &#x3D; g[complement] [j], dp[mask] &#x3D; min(dp[mask], dp[prev] + cost)。</p>
+<p>最后的答案就是dp[full]，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="type">int</span> full = (<span class="number">1</span> &lt;&lt; m) - <span class="number">1</span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">g</span><span class="params">((<span class="number">1</span> &lt;&lt; m) * m, <span class="number">0</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">d</span><span class="params">(m)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) cin &gt;&gt; d[j];</span><br><span class="line">        string s;</span><br><span class="line">        cin &gt;&gt; s;</span><br><span class="line">        <span class="type">int</span> mask = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">            <span class="keyword">if</span> (s[j] == <span class="string">&#x27;R&#x27;</span>) mask |= (<span class="number">1</span> &lt;&lt; j);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">            g[mask * m + j] += d[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> bit = <span class="number">0</span>; bit &lt; m; ++bit) &#123;</span><br><span class="line">        <span class="type">int</span> step = <span class="number">1</span> &lt;&lt; bit;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> mask = <span class="number">0</span>; mask &lt;= full; ++mask) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mask &amp; step) &#123;</span><br><span class="line">                <span class="type">int</span> prev = mask ^ step;</span><br><span class="line">                <span class="type">long</span> <span class="type">long</span>* dst = &amp;g[mask * m];</span><br><span class="line">                <span class="type">long</span> <span class="type">long</span>* src = &amp;g[prev * m];</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">                    dst[j] += src[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> <span class="type">long</span> INF = <span class="number">1e18</span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">dp</span><span class="params">(<span class="number">1</span> &lt;&lt; m, INF)</span></span>;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> mask = <span class="number">1</span>; mask &lt;= full; ++mask) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mask &amp; (<span class="number">1</span> &lt;&lt; j)) &#123;</span><br><span class="line">                <span class="type">int</span> prev = mask ^ (<span class="number">1</span> &lt;&lt; j);</span><br><span class="line">                <span class="type">int</span> complement = full ^ prev; </span><br><span class="line">                <span class="type">long</span> <span class="type">long</span> cost = g[complement * m + j];</span><br><span class="line">                <span class="keyword">if</span> (dp[prev] + cost &lt; dp[mask])</span><br><span class="line">                    dp[mask] = dp[prev] + cost;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; dp[full] &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> t = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//cin &gt;&gt; t;</span></span><br><span class="line">    <span class="keyword">while</span>(t --) &#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/" data-id="cuidxmnt_IBUq91P_cKxu0CXW" data-title="2026牛客暑期多校训练营4题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/07/26/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A53%E9%A2%98%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">2026牛客暑期多校训练营3题解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 10px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营4题解</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/26/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A53%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营3题解</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营2题解</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/">2026牛客暑期多校训练营1题解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 crazy0song<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
