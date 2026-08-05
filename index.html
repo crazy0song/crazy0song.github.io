@@ -93,14 +93,199 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h1 id="Problem-H-困难问题"><a href="#Problem-H-困难问题" class="headerlink" title="Problem H. 困难问题"></a>Problem H. 困难问题</h1><p><strong>输入文件：</strong> 标准输入<br><strong>输出文件：</strong> 标准输出<br><strong>时间限制：</strong> 1 秒<br><strong>内存限制：</strong> 256 MB</p>
+<p>给定一个整数 n。请找出长度为 n 的字典序最小的排列 p，使得对于任意 1 ≤ i ≤ n，|p[i] - p[(i mod n) + 1]| 都不是质数。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>每个测试包含多个测试用例。第一行包含测试用例的数量 t（1 ≤ t ≤ 10^4）。接下来是测试用例的描述。</p>
+<p>每个测试用例的唯一一行包含一个整数 n（2 ≤ n ≤ 2×10^5）。</p>
+<p>保证所有测试用例中 n 的总和不超过 2×10^5。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试用例，如果不存在符合条件的长度为 n 的排列，请输出 -1。</p>
+<p>否则，输出 n 个互不相同的整数 p1, p2, …, pn（1 ≤ pi ≤ n），表示你找到的排列 p。</p>
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th>标准输入</th>
+<th>标准输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>1 2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>这是一个构造类问题，需要构造出一个字典序最小的排列使得每两个相邻的数字之差都不是质数，其中p[1]与p[n]相邻。很容易就能想到字典序最小则一定是以1开头，而且1也不是质数，因此我们可以直接按照从1到n进行排列，会发现只要满足n-1不是质数即可，其中偶数除了2以外都不是质数，也就是说n为奇数且不为3的时候一定可以构造出一个合法的排列。而如果n为偶数的话需要检查n-1是否是质数，可以使用埃氏筛来筛选质数并查找。如果n-1是质数的话，我们从后往前考虑，因为最好构建的非质数就是1，而结尾不能是n，那么我们将n到n-k颠倒过来，从第n-k位开始按照n，n-1，n-2…n-k的顺序构造，这样只要满足k+1不是质数且n-k-1不是质数即可，枚举发现k为3的时候满足条件，此时n大于等于8，因此我们将部分点特殊处理后进行普遍处理即可。（此规律也可通过打表找规律发现）</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">prime</span><span class="params">(MAXN, <span class="literal">true</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">isprime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    prime[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; MAXN; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!prime[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">2</span>; i * j &lt; MAXN; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i * j &gt;= MAXN) <span class="keyword">break</span>;</span><br><span class="line">            prime[i * j] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">3</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n &amp; <span class="number">1</span> || prime[n - <span class="number">1</span>] == <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;1 2&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; n &lt; <span class="number">8</span>) cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= n - <span class="number">3</span>) cout &lt;&lt; n - (i - n + <span class="number">3</span>) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">            <span class="keyword">else</span> cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t = <span class="number">1</span>;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="built_in">isprime</span>();</span><br><span class="line">    <span class="comment">/*for (int i = 1; i &lt; MAXN; i ++) &#123;</span></span><br><span class="line"><span class="comment">        if (prime[i]) cout &lt;&lt; i &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">    <span class="keyword">while</span> (t --) &#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Problem-G-图上游戏"><a href="#Problem-G-图上游戏" class="headerlink" title="Problem G. 图上游戏"></a>Problem G. 图上游戏</h1><p><strong>输入文件：</strong> 标准输入<br><strong>输出文件：</strong> 标准输出<br><strong>时间限制：</strong> 1 秒<br><strong>内存限制：</strong> 256 MB</p>
+<p>给定一个简单连通无向图 G，包含 n 个顶点和 m 条边，以及一个由 k 个特殊顶点 a1, a2, …, ak 组成的集合。G 有一个有趣的性质：所有顶点的度数不超过三。</p>
+<p>考虑在 G 上进行的以下游戏：</p>
+<ul>
+<li><p>游戏由两名玩家 Alice 和 Bob 参与。初始时，Alice 站在一个非特殊顶点 s 上。然后，两名玩家轮流操作，由 Alice 先手：</p>
+<ul>
+<li>如果轮到 Alice 操作，假设她当前在顶点 u。如果 u 是特殊顶点，游戏结束且 Alice 获胜。否则，她选择一个与 u 有边相连的顶点 v 并移动到 v。如果不存在这样的顶点，游戏结束且 Bob 获胜。</li>
+<li>如果轮到 Bob 操作，他会选择 G 中剩余的任意一条边并将其删除。如果 G 中没有边了，他什么也不做。</li>
+</ul>
+</li>
+<li><p>可以证明游戏会在有限回合内结束。在整个游戏过程中，Alice 的位置对两名玩家都是已知的。</p>
+</li>
+</ul>
+<p>一个顶点 u 被认为是必胜的，当且仅当：</p>
+<ul>
+<li>u 不是特殊顶点；</li>
+<li>如果初始时 Alice 站在顶点 u 上，在双方都采取最优策略的情况下，她能赢得游戏。</li>
+</ul>
+<p>找出所有必胜顶点。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>每个测试包含多个测试用例。第一行包含测试用例的数量 t（1 ≤ t ≤ 2×10^4）。接下来是测试用例的描述。</p>
+<p>每个测试用例的第一行包含三个整数 n、m 和 k（1 ≤ k &lt; n ≤ 2×10^5，n-1 ≤ m ≤ min(3n&#x2F;2, 2×10^5)），分别表示 G 中的顶点数、G 中的边数和特殊顶点的数量。</p>
+<p>接下来的 m 行，每行包含两个整数 u 和 v（1 ≤ u, v ≤ n, u ≠ v），表示连接顶点 u 和 v 的一条边。保证 G 不包含自环或重边。此外，保证所有顶点的度数不超过三。</p>
+<p>下一行包含 k 个互不相同的整数 a1, a2, …, ak（1 ≤ ai ≤ n），表示特殊顶点。</p>
+<p>保证所有测试用例中 n 的总和与 m 的总和均不超过 2×10^5。</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个测试用例，首先输出一个整数 c（1 ≤ c ≤ n-k），表示必胜顶点的数量。然后，输出 c 个互不相同的整数 w1, w2, …, wc（1 ≤ wi ≤ n），表示必胜顶点。你可以以任意顺序输出这些顶点。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th>标准输入</th>
+<th>标准输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2 1 1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1 2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3 2 1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1 2</td>
+<td>1 2</td>
+</tr>
+<tr>
+<td>2 3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2 3</td>
+</tr>
+<tr>
+<td>4 3 2</td>
+<td></td>
+</tr>
+<tr>
+<td>1 2</td>
+<td></td>
+</tr>
+<tr>
+<td>2 3</td>
+<td></td>
+</tr>
+<tr>
+<td>2 4</td>
+<td></td>
+</tr>
+<tr>
+<td>3 4</td>
+<td></td>
+</tr>
+<tr>
+<td>4 5 1</td>
+<td></td>
+</tr>
+<tr>
+<td>1 2</td>
+<td></td>
+</tr>
+<tr>
+<td>1 3</td>
+<td></td>
+</tr>
+<tr>
+<td>2 4</td>
+<td></td>
+</tr>
+<tr>
+<td>3 4</td>
+<td></td>
+</tr>
+<tr>
+<td>2 3</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>本题是一个博弈论问题，根据规则，很容易就能想到与特殊点相邻的点是必胜点，再往深了思考，轮到Bob的回合的时候，Alice要想赢，她就必须要有两条路可以获胜，这样不管Bob删除哪一条路，Alice都有另一个选择可以获胜。我们构造一种点称为安全点，只要处于这个点，此时不管轮到谁Alice都是必胜的。不难发现，特殊点都是安全点，并且基于刚才的分析，一个点是安全点，当且仅当这个点有两个邻居是安全点。因此我们可以从特殊点开始往外遍历，记录每一个点的安全点的邻居数，并不断更新，最终安全点里除去特殊点之外的点就是必胜点。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; qu;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, m, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">a</span>(n + <span class="number">5</span>);</span><br><span class="line">    <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">sp</span><span class="params">(n + <span class="number">5</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(n + <span class="number">5</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i ++) &#123;</span><br><span class="line">        <span class="type">int</span> u, v;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v;</span><br><span class="line">        a[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        a[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; i ++) &#123;</span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">        sp[x] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;safe = sp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (safe[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> u : a[i])</span><br><span class="line">            <span class="keyword">if</span> (safe[u]) cnt[i] ++;</span><br><span class="line">        <span class="keyword">if</span> (cnt[i] &gt;= <span class="number">2</span>) qu.<span class="built_in">push</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!qu.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="type">int</span> u = qu.<span class="built_in">front</span>();</span><br><span class="line">        qu.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (safe[u]) <span class="keyword">continue</span>;</span><br><span class="line">        safe[u] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> v : a[u]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (safe[v]) <span class="keyword">continue</span>;</span><br><span class="line">            cnt[v] ++;</span><br><span class="line">            <span class="keyword">if</span> (cnt[v] &gt;= <span class="number">2</span>) qu.<span class="built_in">push</span>(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; win;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sp[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (safe[i]) &#123;</span><br><span class="line">            win.<span class="built_in">push_back</span>(i);</span><br><span class="line">            ans ++;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> u : a[i]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (safe[u]) &#123;</span><br><span class="line">                win.<span class="built_in">push_back</span>(i);</span><br><span class="line">                ans ++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; win.<span class="built_in">size</span>(); i ++) &#123;</span><br><span class="line">        cout &lt;&lt; win[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t = <span class="number">1</span>;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t --) &#123;</span><br><span class="line">        <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Problem-F-字母表"><a href="#Problem-F-字母表" class="headerlink" title="Problem F. 字母表"></a>Problem F. 字母表</h1><p><strong>输入文件：</strong> 标准输入<br><strong>输出文件：</strong> 标准输出<br><strong>时间限制：</strong> 10 秒<br><strong>内存限制：</strong> 1024 MB</p>
+<p>在本题中，字母表被定义为小写英文字母从 a 到 z 的一个排列。在字母表 A 下，字母 x 的字典序小于字母 y 当且仅当在 A 中 x 出现在 y 之前。</p>
+<p>在字母表 A 下，字符串 s 的字典序小于字符串 t 当且仅当满足以下两个条件之一：</p>
+<ul>
+<li>s 是 t 的真前缀。</li>
+<li>存在一个整数 i（1 ≤ i ≤ min(|s|, |t|)），使得对于所有的 1 ≤ j &lt; i 都有 s[j] &#x3D; t[j]，并且在字母表 A 下 s[i] 的字典序小于 t[i]。</li>
+</ul>
+<p>在字母表 A 下，字符串 s 被称为一个 Lyndon 串，当且仅当在 A 下它的字典序严格小于其所有的非空真后缀。</p>
+<p>给定一个字符串 s。请计算有多少种不同的字母表 A 使得 s 在 A 下是一个 Lyndon 串。由于答案可能很大，请输出其对 2^32 取模后的余数。</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>每个测试点仅包含一行，给出一个字符串 s（2 ≤ |s| ≤ 2×10^7）。</p>
+<h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示使得 s 在字母表 A 下是 Lyndon 串的不同字母表 A 的数量对 2^32 取模的结果。</p>
+<h2 id="样例-2"><a href="#样例-2" class="headerlink" title="样例"></a>样例</h2><table>
+<thead>
+<tr>
+<th>标准输入</th>
+<th>标准输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abcdefghijklmnopqrstuvwxyz</td>
+<td>2076180480</td>
+</tr>
+<tr>
+<td>abaabb</td>
+<td>0</td>
+</tr>
+<tr>
+<td>sserxhsfan</td>
+<td>2452619264</td>
+</tr>
+<tr>
+<td>arcabcagc</td>
+<td>3598712832</td>
+</tr>
+</tbody></table>
+<h2 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/08/05/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A56%E9%A2%98%E8%A7%A3/" data-id="cuidTKxiZLt7LJcHQptyT1kXQ" data-title="2026牛客暑期多校训练营6题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/08/05/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A56%E9%A2%98%E8%A7%A3/" data-id="cuidaHhwmpQC2UEZIzIFRJtV4" data-title="2026牛客暑期多校训练营6题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+
     </footer>
   </div>
   
@@ -363,7 +548,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/31/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A55%E9%A2%98%E8%A7%A3/" data-id="cuidirAdh1KtB7b2FK5AfwHv7" data-title="2026牛客暑期多校训练营5题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/31/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A55%E9%A2%98%E8%A7%A3/" data-id="cuidq1h6Det8vTFLPWzIwsr02" data-title="2026牛客暑期多校训练营5题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -548,7 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/" data-id="cuidenLLGcsUHWz7ffulYk7K_" data-title="2026牛客暑期多校训练营4题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/29/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A54%E9%A2%98%E8%A7%A3/" data-id="cuid4Xv7z5_gmGZJ39ItulfGD" data-title="2026牛客暑期多校训练营4题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -919,7 +1104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/26/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A53%E9%A2%98%E8%A7%A3/" data-id="cuidu76c_MxfgW9vT76BPvAiN" data-title="2026牛客暑期多校训练营3题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/26/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A53%E9%A2%98%E8%A7%A3/" data-id="cuidC7_mdtrqyClfr-OGosis0" data-title="2026牛客暑期多校训练营3题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -999,7 +1184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/" data-id="cuidTPYsfC7lr67qSLzNUAWi_" data-title="2026牛客暑期多校训练营2题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/23/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A52%E9%A2%98%E8%A7%A3/" data-id="cuidTN8svQhol_p-oJoJYB2-r" data-title="2026牛客暑期多校训练营2题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -1096,7 +1281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" data-id="cuidBXsoopqE2km8ZJb5_j1eK" data-title="2026牛客暑期多校训练营1题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2026/07/18/2026%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A51%E9%A2%98%E8%A7%A3/" data-id="cuid1COadvURGxHc_NzrrWH31" data-title="2026牛客暑期多校训练营1题解" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
